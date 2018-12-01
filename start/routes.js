@@ -20,4 +20,8 @@ Route.get('/', () => {
 	return { greeting: 'Welcome to pandora box' }
 })
 
-Route.post("/", "UserController.index");
+Route.group(() => {
+	Route.post("/image/upload", "UserController.index");
+}).prefix("api/v1/service/cloudinery")
+
+

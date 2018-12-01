@@ -19,3 +19,5 @@ const Route = use('Route')
 Route.get('/', () => {
 	return { greeting: 'Welcome to pandora box' }
 })
+
+Route.post("/", "UserController.index");

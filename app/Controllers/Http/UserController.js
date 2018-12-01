@@ -9,6 +9,9 @@ const CloudineryService = use("App/Services/CloudineryService");
 
 class UserController {
 
+
+
+
 	async index({request, response}){
 
 		const file = request.file('file')

@@ -22,6 +22,6 @@ Route.get('/', () => {
 
 Route.group(() => {
 	Route.post("/image/upload", "UserController.index");
-}).prefix("api/v1/service/cloudinery")
+}).prefix("api/v1/service/cloudinery")->middleware('cloudinery')
 
 

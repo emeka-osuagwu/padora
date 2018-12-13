@@ -21,7 +21,8 @@ Route.get('/', () => {
 })
 
 Route.group(() => {
-	Route.post("/image/upload", "UserController.index");
-}).prefix("api/v1/service/cloudinery")->middleware('cloudinery')
+	Route.post("/image/upload", "CloudineryController.imageUpload");
+	Route.post("/blob/upload", "CloudineryController.blobUpload");
+}).prefix("api/v1/service/cloudinery").middleware(['cloudinery'])
 
 

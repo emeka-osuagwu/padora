@@ -16,8 +16,8 @@ class CloudineryService {
 		});	
 	}
 
-	async updateAsset(data) {
-		return await cloudinary.v2.uploader.upload(data, {folder: 'uniclip'});
+	async updateAsset(data, folder_name=null) {
+		return await cloudinary.v2.uploader.upload(data, {folder: folder_name});
 	}
 }
 

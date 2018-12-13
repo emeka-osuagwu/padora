@@ -37,7 +37,6 @@ const namedMiddleware = {
   auth: 'Adonis/Middleware/Auth',
   guest: 'Adonis/Middleware/AllowGuestOnly',
   cloudinery: 'App/Middleware/CloudineryMiddleware'
-
 }
 
 /*

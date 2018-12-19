@@ -17,35 +17,35 @@ const cloudineryValidation = new CloudineryValidation();
 
 class CloudineryController {
 
-	async imageUpload({request, response}){
+    async imageUpload({request, response}){
 
-		const file = request.file('file')
+        const file = request.file('file')
 
-		const cloudineryService = new CloudineryService(request.header('CLOUDINARY_CLOUD_NAME'), request.header('CLOUDINARY_API_KEY'), request.header('CLOUDINARY_API_SECRET'));
+        const cloudineryService = new CloudineryService(request.header('CLOUDINARY_CLOUD_NAME'), request.header('CLOUDINARY_API_KEY'), request.header('CLOUDINARY_API_SECRET'));
 
-		return response.send({
-			data: await cloudineryService.updateAsset(file.tmpPath)
-		})
-	}
+        return response.send({
+            data: await cloudineryService.updateAsset(file.tmpPath)
+        })
+    }
 
-	async blobUpload({request, response}){
+    async blobUpload({request, response}){
 
-		let validation = await cloudineryValidation.validateUploadBlob(request.all());
+        let validation = await cloudineryValidation.validateUploadBlob(request.all());
 
-		if(validation.fails()) {
-			return response.status(400).send({
-				status: 400,
-				data: validation.messages()
-			});
-		}
+        if(validation.fails()) {
+            return response.status(400).send({
+                status: 400,
+                data: validation.messages()
+            });
+        }
 
-		const cloudineryService = new CloudineryService(request.header('CLOUDINARY_CLOUD_NAME'), request.header('CLOUDINARY_API_KEY'), request.header('CLOUDINARY_API_SECRET'));
+        const cloudineryService = new CloudineryService(request.header('CLOUDINARY_CLOUD_NAME'), request.header('CLOUDINARY_API_KEY'), request.header('CLOUDINARY_API_SECRET'));
 
-		return response.status(200).send({
-			status: 200,
-			data: await cloudineryService.updateAsset(request.input('image'))
-		})
-	}
+        return response.status(200).send({
+            status: 200,
+            data: await cloudineryService.updateAsset(request.input('image'))
+        })
+    }
 }
 
 module.exports = CloudineryController

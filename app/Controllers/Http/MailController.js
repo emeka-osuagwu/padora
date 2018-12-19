@@ -20,29 +20,25 @@ class MailController {
 
     async send({request, response}){
 
-        response.send('fvdjkh')
-
-
-
         nodemailer.createTestAccount((err, account) => {
 
             // create reusable transporter object using the default SMTP transport
             let transporter = nodemailer.createTransport({
-                host: 'smtp.mailtrap.io',
-                port: 2525,
+                host: request.header('MAIL_HOST'),
+                port: request.header('MAIL_PORT'),
                 secure: false,
                 auth: {
-                    user: "e6ef6997fc23e3",
-                    pass: "db2fc14a3f00ce"
+                    user: request.header('MAIL_USERNAME'),
+                    pass: request.header('MAIL_PASSWORD')
                 }
             });
 
             // setup email data with unicode symbols
             let mailOptions = {
-                from: "noreply@emeka.com", // sender address
-                to: 'emeka.osuagwu@spongegroup.com.ng', // list of receivers
-                subject: 'Hello ✔', // Subject line
-                text: 'Hello world?', // plain text body
+                from: request.input('sender'), // sender address
+                to: request.input('receiver'), // list of receivers
+                subject: request.input('subject'), // Subject line
+                // text: 'Hello world?', // plain text body
                 html: request.input('html') // html body
             };
 

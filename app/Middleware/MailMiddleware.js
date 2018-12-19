@@ -3,7 +3,7 @@
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
 /** @typedef {import('@adonisjs/framework/src/View')} View */
 
-class CloudineryMiddleware {
+class MailMiddleware {
 /**
 * @param {object} ctx
 * @param {Request} ctx.request
@@ -11,22 +11,28 @@ class CloudineryMiddleware {
 */
 	async handle ({ request, response }, next) {
 
-		if (!request.header('CLOUDINARY_CLOUD_NAME') || request.header('CLOUDINARY_CLOUD_NAME') == '') {
+        if (!request.header('MAIL_USERNAME') || request.header('MAIL_USERNAME') == '') {
+            return response.status(400).send({
+                status: 400,
+                message: "MAIL_USERNAME is not set"
+            })
+        }
+        else if (!request.header('MAIL_PASSWORD') || request.header('MAIL_PASSWORD') == '') {
+            return response.status(400).send({
+                status: 400,
+                message: "MAIL_PASSWORD is not set"
+            })
+        }
+        else if (!request.header('MAIL_PORT') || request.header('MAIL_PORT') == '') {
+            return response.status(400).send({
+                status: 400,
+                message: "MAIL_PORT is not set"
+            })
+        }
+		else if (!request.header('MAIL_HOST') || request.header('MAIL_HOST') == '') {
 			return response.status(400).send({
 				status: 400,
-				message: "CLOUDINARY_CLOUD_NAME is not set"
-			})
-		}
-		else if (!request.header('CLOUDINARY_API_KEY') || request.header('CLOUDINARY_API_KEY') == '') {
-			return response.status(400).send({
-				status: 400,
-				message: "CLOUDINARY_API_KEY is not set"
-			})
-		}
-		else if (!request.header('CLOUDINARY_API_SECRET') || request.header('CLOUDINARY_API_SECRET') == '') {
-			return response.status(400).send({
-				status: 400,
-				message: "CLOUDINARY_API_SECRET is not set"
+				message: "MAIL_HOST is not set"
 			})
 		}
 
@@ -34,4 +40,4 @@ class CloudineryMiddleware {
 	}
 }
 
-module.exports = CloudineryMiddleware
+module.exports = MailMiddleware

@@ -19,6 +19,10 @@ class CloudineryService {
 	async updateAsset(data, folder_name=null) {
 		return await cloudinary.v2.uploader.upload(data, {folder: folder_name});
 	}
+
+	async videoAsset(data, folder_name=null) {
+		return await cloudinary.v2.uploader.upload(data, { resource_type: "video" });
+	}
 }
 
 module.exports = CloudineryService;

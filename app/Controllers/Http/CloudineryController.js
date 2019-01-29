@@ -28,6 +28,19 @@ class CloudineryController {
         })
     }
 
+    async videoUpload({request, response}){
+
+        const file = request.file('file')
+
+        return file;
+
+        const cloudineryService = new CloudineryService(request.header('CLOUDINARY_CLOUD_NAME'), request.header('CLOUDINARY_API_KEY'), request.header('CLOUDINARY_API_SECRET'));
+
+        return response.send({
+            data: await cloudineryService.videoAsset(file.tmpPath)
+        })
+    }
+
     async blobUpload({request, response}){
 
         let validation = await cloudineryValidation.validateUploadBlob(request.all());

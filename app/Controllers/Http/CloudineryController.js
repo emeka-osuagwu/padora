@@ -28,6 +28,12 @@ class CloudineryController {
         })
     }
 
+    /**
+     * [videoUpload description]
+     * @param  {[type]} options.request  [description]
+     * @param  {[type]} options.response [description]
+     * @return {[type]}                  [description]
+     */
     async videoUpload({request, response}){
 
         const file = request.file('file')

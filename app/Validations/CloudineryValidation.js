@@ -25,6 +25,22 @@ class CloudineryValidation {
 		return validation;
 	}
 
+	async validateUploadImage(data){
+
+		let validationMessages = {
+			// "required": "{{ field }} cannot be empty please supply a valid value",
+			"file.required": "blob image string is required",
+		};
+
+		let rules = {
+			file: "required|file"
+		};
+
+		let validation = await validateAll(data, rules, validationMessages, formatters.JsonApi);
+
+		return validation;
+	}
+
 	async validateUploadBlob(data){
 
 		let validationMessages = {

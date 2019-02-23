@@ -17,10 +17,27 @@ const cloudineryValidation = new CloudineryValidation();
 
 class CloudineryController {
 
+    /**
+     * imageUpload
+     * @param  {[type]} options.request 
+     * @param  {[type]} options.response 
+     * @return array                  
+     */
     async imageUpload({request, response}){
+        
+        request.all().file = avatar;
 
-        const file = request.file('file')
+        let validation = await cloudineryValidation.validateUploadImage(request.all());
 
+        if(validation.fails()) {
+            return response.send({
+                status: 400,
+                data: validation.messages()
+            });
+        }
+
+        const file = request.file('file');        
+        return file;
         const cloudineryService = new CloudineryService(request.header('CLOUDINARY_CLOUD_NAME'), request.header('CLOUDINARY_API_KEY'), request.header('CLOUDINARY_API_SECRET'));
 
         return response.send({
